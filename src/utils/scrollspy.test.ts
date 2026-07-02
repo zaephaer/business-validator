@@ -19,4 +19,8 @@ describe('determineActiveSection', () => {
   it('returns the last matching section when multiple thresholds are passed', () => {
     expect(determineActiveSection(sections, 1050)).toBe('competitors');
   });
+
+  it('returns an empty string when there are no sections', () => {
+    expect(determineActiveSection([], 100)).toBe('');
+  });
 });
