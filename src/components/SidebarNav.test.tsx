@@ -25,4 +25,16 @@ describe('SidebarNav', () => {
     fireEvent.click(screen.getByText('Market Score'));
     expect(onNavigate).toHaveBeenCalledWith('market');
   });
+
+  it('does not render a back button when onBack is not provided', () => {
+    render(<SidebarNav sections={sections} activeId="summary" onNavigate={() => {}} />);
+    expect(screen.queryByRole('button', { name: /back to start/i })).not.toBeInTheDocument();
+  });
+
+  it('renders a back button and calls onBack when clicked, given onBack', () => {
+    const onBack = vi.fn();
+    render(<SidebarNav sections={sections} activeId="summary" onNavigate={() => {}} onBack={onBack} />);
+    fireEvent.click(screen.getByRole('button', { name: /back to start/i }));
+    expect(onBack).toHaveBeenCalled();
+  });
 });

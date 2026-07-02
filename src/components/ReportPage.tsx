@@ -30,9 +30,10 @@ const SECTIONS: SidebarSection[] = [
 
 interface Props {
   report: Report;
+  onBackToStart: () => void;
 }
 
-export function ReportPage({ report }: Props) {
+export function ReportPage({ report, onBackToStart }: Props) {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -52,9 +53,15 @@ export function ReportPage({ report }: Props) {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function handleBack() {
+    if (window.confirm('Discard this report and start a new idea?')) {
+      onBackToStart();
+    }
+  }
+
   return (
     <div className="report-page">
-      <SidebarNav sections={SECTIONS} activeId={activeId} onNavigate={handleNavigate} />
+      <SidebarNav sections={SECTIONS} activeId={activeId} onNavigate={handleNavigate} onBack={handleBack} />
       <div className="report-page__actions">
         <ExportPdfButton targetRef={containerRef} fileName={`${slugifyFileName(report.idea)}-validation-report.pdf`} />
       </div>

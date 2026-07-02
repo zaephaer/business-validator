@@ -24,6 +24,12 @@ export function App() {
     });
   }
 
+  function handleBackToStart() {
+    setIdea('');
+    setReport(null);
+    setStatus('input');
+  }
+
   if (status === 'input') {
     return <IdeaInputForm onSubmit={handleSubmit} />;
   }
@@ -33,7 +39,7 @@ export function App() {
   }
 
   if (report) {
-    return <ReportPage report={report} />;
+    return <ReportPage report={report} onBackToStart={handleBackToStart} />;
   }
 
   return null;

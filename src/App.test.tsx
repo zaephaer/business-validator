@@ -27,4 +27,23 @@ describe('App', () => {
 
     expect(screen.getByText(/1\. Market Score/)).toBeInTheDocument();
   });
+
+  it('returns to the input screen when the user confirms leaving the report', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true);
+    render(<App />);
+
+    fireEvent.change(screen.getByLabelText(/startup idea/i), {
+      target: { value: 'A marketplace for used bikes' },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /validate my idea/i }));
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(900 * 6);
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: /back to start/i }));
+
+    expect(screen.getByLabelText(/startup idea/i)).toBeInTheDocument();
+    vi.restoreAllMocks();
+  });
 });

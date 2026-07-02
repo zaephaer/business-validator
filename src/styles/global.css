@@ -6,7 +6,7 @@ body {
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text-body);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
 }
 
 button {
@@ -35,7 +35,7 @@ button {
   border: 1px solid var(--color-border);
   border-radius: 8px;
   color: var(--color-text-body);
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 15px;
   padding: 12px;
   resize: vertical;
@@ -109,6 +109,24 @@ button {
   letter-spacing: 0.05em;
   margin-bottom: 16px;
   text-transform: uppercase;
+}
+
+.sidebar-nav__back {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-text-muted);
+  padding: 8px 10px;
+  margin-bottom: 16px;
+  font-size: 12px;
+}
+
+.sidebar-nav__back:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
 }
 
 .sidebar-nav ul {
