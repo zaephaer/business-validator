@@ -3,14 +3,18 @@ import { render, screen } from '@testing-library/react';
 import { MVPFeatureList } from './MVPFeatureList';
 
 const data = {
-  build: ['Core workflow'],
-  avoid: ['Team collaboration'],
+  build: ['Core workflow', 'Simple onboarding', 'Basic analytics'],
+  avoid: ['Team collaboration', 'Custom branding', 'Native mobile apps'],
 };
 
 describe('MVPFeatureList', () => {
-  it('renders build-first and avoid lists', () => {
+  it('renders every build-first and avoid item', () => {
     render(<MVPFeatureList data={data} />);
-    expect(screen.getByText('Core workflow')).toBeInTheDocument();
-    expect(screen.getByText('Team collaboration')).toBeInTheDocument();
+    data.build.forEach((feature) => {
+      expect(screen.getByText(feature)).toBeInTheDocument();
+    });
+    data.avoid.forEach((feature) => {
+      expect(screen.getByText(feature)).toBeInTheDocument();
+    });
   });
 });
