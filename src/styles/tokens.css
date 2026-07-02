@@ -1,0 +1,12 @@
+:root {
+  --color-bg: #0b1120;
+  --color-bg-panel: #0f172a;
+  --color-bg-card: #111827;
+  --color-border: #1e293b;
+  --color-gold: #e2c766;
+  --color-text-primary: #f1f5f9;
+  --color-text-body: #e2e8f0;
+  --color-text-muted: #94a3b8;
+  --color-text-faint: #64748b;
+  --font-serif: Georgia, 'Times New Roman', serif;
+}
