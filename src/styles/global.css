@@ -130,6 +130,7 @@ button {
 
 .sidebar-nav button.active {
   color: var(--color-gold);
+  /* --color-gold (#e2c766) at 8% opacity */
   background: rgba(226, 199, 102, 0.08);
 }
 
