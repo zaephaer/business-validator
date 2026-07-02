@@ -3,6 +3,7 @@ import type { Report } from '../types/report';
 import { SidebarNav, type SidebarSection } from './SidebarNav';
 import { ExportPdfButton } from './ExportPdfButton';
 import { determineActiveSection } from '../utils/scrollspy';
+import { slugifyFileName } from '../utils/slugifyFileName';
 import { ExecutiveSummary } from './sections/ExecutiveSummary';
 import { MarketScore } from './sections/MarketScore';
 import { CompetitorScan } from './sections/CompetitorScan';
@@ -55,7 +56,7 @@ export function ReportPage({ report }: Props) {
     <div className="report-page">
       <SidebarNav sections={SECTIONS} activeId={activeId} onNavigate={handleNavigate} />
       <div className="report-page__actions">
-        <ExportPdfButton targetRef={containerRef} fileName={`${report.idea}-validation-report.pdf`} />
+        <ExportPdfButton targetRef={containerRef} fileName={`${slugifyFileName(report.idea)}-validation-report.pdf`} />
       </div>
       <div className="report-page__content" ref={containerRef}>
         <ExecutiveSummary data={report.executiveSummary} ideaLabel={report.idea} />
