@@ -124,6 +124,6 @@ export const industryBanks: Record<IndustrySignal, IndustryBank> = {
     risks: ['Undifferentiated positioning versus incumbents', 'Unproven willingness to pay', 'Customer acquisition cost higher than assumed'],
     successFactors: ['Clear wedge use case to win an initial beachhead market', 'Fast feedback loop with early users', 'Distribution advantage or unfair edge'],
     targetCustomer: 'Early adopters actively frustrated with the current best alternative',
-    channels: ['Product Hunt', 'Relevant subreddits and forums', 'Direct outreach to early adopters'],
+    channels: ['Indie Hackers', 'Relevant subreddits and forums', 'Direct outreach to early adopters'],
   },
 };
