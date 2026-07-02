@@ -18,5 +18,7 @@ describe('ReportPage', () => {
     expect(screen.getByText(/8\. SWOT Analysis/)).toBeInTheDocument();
     expect(screen.getByText(/9\. Financial Projections/)).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /export pdf/i })).toBeInTheDocument();
+    expect(screen.getByText(/Startup Idea Validation Report/)).toBeInTheDocument();
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
 });
