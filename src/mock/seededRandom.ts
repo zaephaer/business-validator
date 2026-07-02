@@ -8,7 +8,7 @@ export function hashStringToSeed(input: string): number {
 }
 
 export function createSeededRandom(seed: number): () => number {
-  let state = seed || 1;
+  let state = seed;
   return function next(): number {
     state = (state * 1103515245 + 12345) & 0x7fffffff;
     return state / 0x7fffffff;

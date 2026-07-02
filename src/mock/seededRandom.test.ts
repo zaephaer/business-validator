@@ -25,6 +25,12 @@ describe('createSeededRandom', () => {
     const randB = createSeededRandom(999);
     expect(randA()).not.toBe(randB());
   });
+
+  it('does not collide seed 0 with seed 1', () => {
+    const randZero = createSeededRandom(0);
+    const randOne = createSeededRandom(1);
+    expect(randZero()).not.toBe(randOne());
+  });
 });
 
 describe('randomInRange', () => {
