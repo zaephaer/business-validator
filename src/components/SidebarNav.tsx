@@ -16,13 +16,16 @@ export function SidebarNav({ sections, activeId, onNavigate }: Props) {
       <ul>
         {sections.map((section) => (
           <li key={section.id}>
-            <button
-              type="button"
+            <a
+              href={`#${section.id}`}
               className={section.id === activeId ? 'active' : ''}
-              onClick={() => onNavigate(section.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate(section.id);
+              }}
             >
               {section.label}
-            </button>
+            </a>
           </li>
         ))}
       </ul>
