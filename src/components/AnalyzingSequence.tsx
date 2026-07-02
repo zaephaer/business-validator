@@ -20,13 +20,11 @@ export function AnalyzingSequence({ onComplete }: Props) {
 
   useEffect(() => {
     if (stageIndex >= STAGES.length - 1) {
-      onComplete();
-      return;
+      const finishTimer = setTimeout(onComplete, STAGE_DURATION_MS);
+      return () => clearTimeout(finishTimer);
     }
     const timer = setTimeout(() => {
-      flushSync(() => {
-        setStageIndex((i) => i + 1);
-      });
+      flushSync(() => setStageIndex((i) => i + 1));
     }, STAGE_DURATION_MS);
     return () => clearTimeout(timer);
   }, [stageIndex, onComplete]);
