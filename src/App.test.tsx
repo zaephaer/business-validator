@@ -14,6 +14,8 @@ describe('App', () => {
   it('walks from input to analyzing to report', async () => {
     render(<App />);
 
+    fireEvent.click(screen.getByRole('button', { name: /start validating/i }));
+
     fireEvent.change(screen.getByLabelText(/startup idea/i), {
       target: { value: 'A marketplace for used bikes' },
     });
@@ -31,6 +33,8 @@ describe('App', () => {
   it('returns to the input screen when the user confirms leaving the report', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true);
     render(<App />);
+
+    fireEvent.click(screen.getByRole('button', { name: /start validating/i }));
 
     fireEvent.change(screen.getByLabelText(/startup idea/i), {
       target: { value: 'A marketplace for used bikes' },

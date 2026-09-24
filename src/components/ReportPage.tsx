@@ -5,6 +5,7 @@ import { SidebarNav, type SidebarSection } from './SidebarNav';
 import { ExportPdfButton } from './ExportPdfButton';
 import { determineActiveSection } from '../utils/scrollspy';
 import { slugifyFileName } from '../utils/slugifyFileName';
+import { fadeUpItem, staggerContainer } from '../styles/motion';
 import { ExecutiveSummary } from './sections/ExecutiveSummary';
 import { MarketScore } from './sections/MarketScore';
 import { CompetitorScan } from './sections/CompetitorScan';
@@ -28,16 +29,6 @@ const SECTIONS: SidebarSection[] = [
   { id: 'swot', label: 'SWOT' },
   { id: 'financials', label: 'Financials' },
 ];
-
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-} as const;
-
-const reveal = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
-} as const;
 
 interface Props {
   report: Report;
@@ -81,37 +72,37 @@ export function ReportPage({ report, onBackToStart }: Props) {
           ref={containerRef}
           initial="hidden"
           animate="show"
-          variants={stagger}
+          variants={staggerContainer}
           className="mx-auto max-w-3xl space-y-10"
         >
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <ExecutiveSummary data={report.executiveSummary} ideaLabel={report.idea} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <MarketScore data={report.marketScore} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <CompetitorScan data={report.competitorScan} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <MonetizationIdeas data={report.monetization} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <MVPFeatureList data={report.mvp} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <LaunchStrategy data={report.launchStrategy} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <ViralHooks data={report.viralHooks} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <BusinessModelCanvas data={report.businessModelCanvas} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <SWOTAnalysis data={report.swot} />
           </motion.div>
-          <motion.div variants={reveal}>
+          <motion.div variants={fadeUpItem}>
             <FinancialProjections data={report.financials} />
           </motion.div>
         </motion.div>

@@ -1,17 +1,22 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { LandingPage } from './components/LandingPage';
 import { IdeaInputForm } from './components/IdeaInputForm';
 import { AnalyzingSequence } from './components/AnalyzingSequence';
 import { ReportPage } from './components/ReportPage';
 import { generateReport } from './mock/generateReport';
 import type { Report } from './types/report';
 
-type Status = 'input' | 'analyzing' | 'report';
+type Status = 'landing' | 'input' | 'analyzing' | 'report';
 
 export function App() {
-  const [status, setStatus] = useState<Status>('input');
+  const [status, setStatus] = useState<Status>('landing');
   const [idea, setIdea] = useState('');
   const [report, setReport] = useState<Report | null>(null);
+
+  function handleGetStarted() {
+    setStatus('input');
+  }
 
   function handleSubmit(submittedIdea: string) {
     setIdea(submittedIdea);
@@ -29,6 +34,14 @@ export function App() {
     setIdea('');
     setReport(null);
     setStatus('input');
+  }
+
+  if (status === 'landing') {
+    return (
+      <motion.div key="landing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+        <LandingPage onGetStarted={handleGetStarted} />
+      </motion.div>
+    );
   }
 
   if (status === 'input') {
