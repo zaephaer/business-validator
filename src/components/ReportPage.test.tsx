@@ -1,13 +1,9 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { ReportPage } from './ReportPage';
 import { buildReport } from '../mock/generateReport';
 
 describe('ReportPage', () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
-  });
-
   it('renders every report section for a full report', () => {
     const report = buildReport('A marketplace for used bikes');
     render(<ReportPage report={report} onBackToStart={() => {}} />);
@@ -26,26 +22,28 @@ describe('ReportPage', () => {
     expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
 
-  it('calls onBackToStart when the back button is clicked and the user confirms', () => {
-    vi.spyOn(window, 'confirm').mockReturnValue(true);
+  it('shows a confirmation dialog and calls onBackToStart when the user confirms', () => {
     const onBackToStart = vi.fn();
     const report = buildReport('A marketplace for used bikes');
     render(<ReportPage report={report} onBackToStart={onBackToStart} />);
 
     fireEvent.click(screen.getByRole('button', { name: /back to start/i }));
+    expect(screen.getByRole('alertdialog')).toBeInTheDocument();
 
-    expect(window.confirm).toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: /discard/i }));
+
     expect(onBackToStart).toHaveBeenCalled();
   });
 
   it('does not call onBackToStart when the user cancels the confirmation', () => {
-    vi.spyOn(window, 'confirm').mockReturnValue(false);
     const onBackToStart = vi.fn();
     const report = buildReport('A marketplace for used bikes');
     render(<ReportPage report={report} onBackToStart={onBackToStart} />);
 
     fireEvent.click(screen.getByRole('button', { name: /back to start/i }));
+    fireEvent.click(screen.getByRole('button', { name: /keep editing/i }));
 
     expect(onBackToStart).not.toHaveBeenCalled();
+    expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
   });
 });

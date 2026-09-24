@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import type { Report } from '../types/report';
 import { SidebarNav, type SidebarSection } from './SidebarNav';
 import { ExportPdfButton } from './ExportPdfButton';
+import { ConfirmDialog } from './ConfirmDialog';
 import { determineActiveSection } from '../utils/scrollspy';
 import { slugifyFileName } from '../utils/slugifyFileName';
 import { fadeUpItem, staggerContainer } from '../styles/motion';
@@ -37,6 +38,7 @@ interface Props {
 
 export function ReportPage({ report, onBackToStart }: Props) {
   const [activeId, setActiveId] = useState(SECTIONS[0].id);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,9 +58,7 @@ export function ReportPage({ report, onBackToStart }: Props) {
   }
 
   function handleBack() {
-    if (window.confirm('Discard this report and start a new idea?')) {
-      onBackToStart();
-    }
+    setConfirmOpen(true);
   }
 
   return (
@@ -107,6 +107,18 @@ export function ReportPage({ report, onBackToStart }: Props) {
           </motion.div>
         </motion.div>
       </div>
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Leaving already?"
+        message="Discard this report and start a new idea?"
+        confirmLabel="Discard"
+        cancelLabel="Keep editing"
+        onConfirm={() => {
+          setConfirmOpen(false);
+          onBackToStart();
+        }}
+        onCancel={() => setConfirmOpen(false)}
+      />
     </div>
   );
 }

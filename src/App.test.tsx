@@ -31,7 +31,6 @@ describe('App', () => {
   });
 
   it('returns to the input screen when the user confirms leaving the report', async () => {
-    vi.spyOn(window, 'confirm').mockReturnValue(true);
     render(<App />);
 
     fireEvent.click(screen.getByRole('button', { name: /start validating/i }));
@@ -46,8 +45,8 @@ describe('App', () => {
     });
 
     fireEvent.click(screen.getByRole('button', { name: /back to start/i }));
+    fireEvent.click(screen.getByRole('button', { name: /discard/i }));
 
     expect(screen.getByLabelText(/startup idea/i)).toBeInTheDocument();
-    vi.restoreAllMocks();
   });
 });
