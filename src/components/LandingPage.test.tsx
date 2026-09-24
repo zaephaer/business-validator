@@ -9,6 +9,7 @@ describe('LandingPage', () => {
     expect(screen.getByText('Describe your idea')).toBeInTheDocument();
     expect(screen.getByText('We analyze it')).toBeInTheDocument();
     expect(screen.getByText('Get your report')).toBeInTheDocument();
+    expect(screen.getByText(/no AI model is connected yet/i)).toBeInTheDocument();
   });
 
   it('calls onGetStarted when the CTA is clicked', () => {

@@ -39,6 +39,10 @@ export function LandingPage({ onGetStarted }: Props) {
         >
           Start Validating
         </motion.button>
+        <p className="mt-4 inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-3 py-1 text-xs font-medium text-ink/70">
+          <span className="h-2 w-2 rounded-full bg-violet" />
+          Demo mode: reports are generated from sample data, no AI model is connected yet.
+        </p>
       </motion.div>
 
       <motion.div
