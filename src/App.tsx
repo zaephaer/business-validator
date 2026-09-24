@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { IdeaInputForm } from './components/IdeaInputForm';
 import { AnalyzingSequence } from './components/AnalyzingSequence';
 import { ReportPage } from './components/ReportPage';
@@ -31,15 +32,27 @@ export function App() {
   }
 
   if (status === 'input') {
-    return <IdeaInputForm onSubmit={handleSubmit} />;
+    return (
+      <motion.div key="input" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+        <IdeaInputForm onSubmit={handleSubmit} />
+      </motion.div>
+    );
   }
 
   if (status === 'analyzing') {
-    return <AnalyzingSequence onComplete={handleAnalyzingComplete} />;
+    return (
+      <motion.div key="analyzing" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+        <AnalyzingSequence onComplete={handleAnalyzingComplete} />
+      </motion.div>
+    );
   }
 
   if (report) {
-    return <ReportPage report={report} onBackToStart={handleBackToStart} />;
+    return (
+      <motion.div key="report" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
+        <ReportPage report={report} onBackToStart={handleBackToStart} />
+      </motion.div>
+    );
   }
 
   return null;

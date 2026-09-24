@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
+import { motion } from 'framer-motion';
 
 const STAGES = [
   'Scanning competitors...',
@@ -35,9 +36,22 @@ export function AnalyzingSequence({ onComplete }: Props) {
   }, [stageIndex, onComplete]);
 
   return (
-    <div className="analyzing-sequence">
-      <div className="analyzing-sequence__spinner" />
-      <p>{STAGES[stageIndex]}</p>
+    <div className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
+      <motion.div
+        className="h-16 w-16 rounded-full border-2 border-ink bg-lime shadow-brutal"
+        animate={{ rotate: 360 }}
+        transition={{ repeat: Infinity, duration: 1.1, ease: 'linear' }}
+        style={{ borderTopColor: 'transparent', borderRightColor: 'transparent' }}
+      />
+      <motion.p
+        key={stageIndex}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="font-heading text-lg font-semibold"
+      >
+        {STAGES[stageIndex]}
+      </motion.p>
     </div>
   );
 }

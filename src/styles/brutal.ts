@@ -1,0 +1,10 @@
+export const card = 'rounded-xl border-2 border-ink bg-white p-5 shadow-brutal';
+export const cardTight = 'rounded-lg border-2 border-ink bg-white p-4 shadow-brutal-sm';
+export const heading2 = 'font-heading text-2xl font-bold sm:text-3xl';
+export const heading3 = 'mt-6 font-heading text-lg font-bold';
+export const heading4 = 'font-heading text-base font-bold';
+export const list = 'mt-2 list-disc space-y-1 pl-5 font-body text-sm text-ink/90';
+export const table = 'w-full border-collapse overflow-hidden rounded-xl border-2 border-ink text-sm shadow-brutal';
+export const tableCell = 'border border-ink/20 px-3 py-2 text-left';
+export const tableHeadCell = 'border border-ink/20 bg-lime px-3 py-2 text-left font-heading font-bold';
+export const sectionShell = 'scroll-mt-24 border-t-2 border-ink/10 pt-10 first:mt-0 first:border-t-0 first:pt-0';

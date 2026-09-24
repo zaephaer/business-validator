@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 import type { Report } from '../types/report';
 import { SidebarNav, type SidebarSection } from './SidebarNav';
 import { ExportPdfButton } from './ExportPdfButton';
@@ -27,6 +28,16 @@ const SECTIONS: SidebarSection[] = [
   { id: 'swot', label: 'SWOT' },
   { id: 'financials', label: 'Financials' },
 ];
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+} as const;
+
+const reveal = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
+} as const;
 
 interface Props {
   report: Report;
@@ -60,22 +71,50 @@ export function ReportPage({ report, onBackToStart }: Props) {
   }
 
   return (
-    <div className="report-page">
+    <div className="flex min-h-screen bg-cream">
       <SidebarNav sections={SECTIONS} activeId={activeId} onNavigate={handleNavigate} onBack={handleBack} />
-      <div className="report-page__actions">
-        <ExportPdfButton targetRef={containerRef} fileName={`${slugifyFileName(report.idea)}-validation-report.pdf`} />
-      </div>
-      <div className="report-page__content" ref={containerRef}>
-        <ExecutiveSummary data={report.executiveSummary} ideaLabel={report.idea} />
-        <MarketScore data={report.marketScore} />
-        <CompetitorScan data={report.competitorScan} />
-        <MonetizationIdeas data={report.monetization} />
-        <MVPFeatureList data={report.mvp} />
-        <LaunchStrategy data={report.launchStrategy} />
-        <ViralHooks data={report.viralHooks} />
-        <BusinessModelCanvas data={report.businessModelCanvas} />
-        <SWOTAnalysis data={report.swot} />
-        <FinancialProjections data={report.financials} />
+      <div className="flex-1 px-6 py-8 sm:px-10 sm:py-10">
+        <div className="mb-8 flex justify-end">
+          <ExportPdfButton targetRef={containerRef} fileName={`${slugifyFileName(report.idea)}-validation-report.pdf`} />
+        </div>
+        <motion.div
+          ref={containerRef}
+          initial="hidden"
+          animate="show"
+          variants={stagger}
+          className="mx-auto max-w-3xl space-y-10"
+        >
+          <motion.div variants={reveal}>
+            <ExecutiveSummary data={report.executiveSummary} ideaLabel={report.idea} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <MarketScore data={report.marketScore} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <CompetitorScan data={report.competitorScan} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <MonetizationIdeas data={report.monetization} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <MVPFeatureList data={report.mvp} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <LaunchStrategy data={report.launchStrategy} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <ViralHooks data={report.viralHooks} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <BusinessModelCanvas data={report.businessModelCanvas} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <SWOTAnalysis data={report.swot} />
+          </motion.div>
+          <motion.div variants={reveal}>
+            <FinancialProjections data={report.financials} />
+          </motion.div>
+        </motion.div>
       </div>
     </div>
   );
